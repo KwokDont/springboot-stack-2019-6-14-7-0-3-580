@@ -37,6 +37,6 @@ public class EmployeeController {
     @GetMapping("/employees/leastAge/{leastAge}")
     public List<Employee> findAgeMoreThan(@PathVariable int leastAge) {
         EmployeeRepository repository = new EmployeeRepository();
-        return repository.getAllEmployees().stream().filter(employee -> employee.getAge() > 10).collect(Collectors.toList());
+        return repository.findAgeMoreThan(leastAge);
     }
 }

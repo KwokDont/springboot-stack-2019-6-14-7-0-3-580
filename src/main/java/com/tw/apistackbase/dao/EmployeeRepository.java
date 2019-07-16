@@ -3,6 +3,7 @@ package com.tw.apistackbase.dao;
 import com.tw.apistackbase.model.Employee;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class EmployeeRepository {
     private final static Map<String, Employee> employees = new HashMap<>();
@@ -21,7 +22,11 @@ public class EmployeeRepository {
     }
 
     public void save(Employee employee){
-        addEmployee(employee.getName(),employee.getAge(),employee.getGender());
+        if(employees.containsKey(employee.getId())){
+            employees.put(employee.getId(),employee);
+        }else{
+            addEmployee(employee.getName(),employee.getAge(),employee.getGender());
+        }
     }
 
     public Employee findById(String employeeId){
@@ -34,5 +39,9 @@ public class EmployeeRepository {
 
     public void deleteById(String employeeId) {
         employees.remove(employeeId);
+    }
+
+    public List<Employee> findAgeMoreThan(int leastAge) {
+        return getAllEmployees().stream().filter(employee -> employee.getAge() > leastAge).collect(Collectors.toList());
     }
 }
