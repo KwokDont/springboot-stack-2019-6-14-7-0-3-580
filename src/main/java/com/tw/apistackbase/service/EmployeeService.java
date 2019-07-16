@@ -1,12 +1,10 @@
-package com.tw.apistackbase.dao;
+package com.tw.apistackbase.service;
 
 import com.tw.apistackbase.model.Employee;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public interface EmployeeRepository {
+public interface EmployeeService {
 
     void save(Employee employee);
 
@@ -17,5 +15,4 @@ public interface EmployeeRepository {
     public void deleteById(String employeeId);
 
     public List<Employee> findAgeMoreThan(int leastAge);
-
 }
